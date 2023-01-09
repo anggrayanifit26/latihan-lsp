@@ -63,16 +63,16 @@ Route::prefix('user')->group(function() {
 
     Route::put('/profil', function(Request $request){
         $id = Auth::user()->id;
-        // $foto = $request->file("foto");
-        // $path = $foto->store('public/img');
-        // $namaGambar = basename($path);
+        
+        $imageName = time() .'.'. $request->foto->extension();
+        $request->foto->move(public_path('img', $imageName)); 
 
-        $user = User::find(Auth::user()->id)->update($request->all());
-        $user2 = User::find(Auth::user()->id)->update([
+        $user = User::find($id)->update($request->all());
+        $user2 = User::find($id)->update([
             "password" => Hash::make($request->password),
-            // "foto" => $namaGambar
         ]);
-            if($user && $user2 ){
+        dd($imageName);
+            if($user && $user2 ){ 
                 return redirect()->back()->with("status", "success")->with ("message","Berhasil mengupdate Profil");
             }
             return redirect()->back()->with("status","danger")->with("message", "Gagal mengupdate Profil");
