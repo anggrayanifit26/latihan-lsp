@@ -13,7 +13,9 @@ class Peminjaman extends Model
         "tanggal_peminjaman",
         "kondisi_buku",
         "buku_id",
-        "user_id"
+        "user_id",
+        "kondisi_buku_saat_dipinjam",
+        "kondisi_buku_saat_dikembalikan",
 
     ];
 
