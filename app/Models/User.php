@@ -41,4 +41,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function penerima() {
+        return $this->hasOne(Pesan::class, 'penerima_id');
+    }
+
+    public function pengirim() {
+        return $this->hasOne(Pesan::class, 'pengirim_id');
+    }
+
+    public function peminjam() {
+        return $this->hasOne(Peminjaman::class);
+    }
+    
 }

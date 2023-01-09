@@ -18,4 +18,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/index', 'KategoriController@index');
+// Route::get('/index', 'KategoriController@index');
+Route::prefix('user')->group(function() {
+    Route::get('/dashboard', function(){
+        $pemberitahuan = Pemberitahuan::where('status', 'aktif')->get();
+        $buku = Buku::all();
+        
+        return view('user.dashboard', compact('pemberitahuan', 'buku'));
+    })->name('user.dashboard');
+});

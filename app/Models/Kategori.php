@@ -10,6 +10,9 @@ class Kategori extends Model
     use HasFactory;
 
     protected $fillable = [
-
+        
     ];
+    public function bukus(){
+        return $this->hasMany(Buku::class);
+    } 
 }
