@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Pemberitahuan;
 use App\Models\Peminjaman;
 use App\Models\Buku;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +60,24 @@ Route::prefix('user')->group(function() {
     Route::get('/profil', function(){
         return view('user.profil');
     })->name('user.profil');
+
+    Route::put('/profil', function(Request $request){
+        $id = Auth::user()->id;
+        // $foto = $request->file("foto");
+        // $path = $foto->store('public/img');
+        // $namaGambar = basename($path);
+
+        $user = User::find(Auth::user()->id)->update($request->all());
+        $user2 = User::find(Auth::user()->id)->update([
+            "password" => Hash::make($request->password),
+            // "foto" => $namaGambar
+        ]);
+            if($user && $user2 ){
+                return redirect()->back()->with("status", "success")->with ("message","Berhasil mengupdate Profil");
+            }
+            return redirect()->back()->with("status","danger")->with("message", "Gagal mengupdate Profil");
+    })->name('user.profil.update');
+
 
     Route::post('submit_peminjaman', function(Request $request){
         $tanggal_peminjaman = $request->tanggal_peminjaman;
