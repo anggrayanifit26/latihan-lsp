@@ -9,7 +9,7 @@
             </div>
             <div class="row">
                 <div class="text-end">
-                    <a href="{{ route('user.form_peminjaman') }}" class="btn btn-primary">Pinjam Buku</a>
+                    <a href="{{ route('user.form_peminjaman_dashboard') }}" class="btn btn-primary">Pinjam Buku</a>
                 </div>
             </div>
         </div>

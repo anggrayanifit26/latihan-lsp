@@ -38,7 +38,7 @@ Route::prefix('user')->group(function() {
     Route::post('/form_peminjaman', function(Request $request){
         $buku_id = $request->buku_id;
         $buku = Buku::all();
-        return view('user.form_peminjaman', compact('buku'));
+        return view('user.form_peminjaman', compact('buku','buku_id'));
     })->name('user.form_peminjaman_dashboard');
 
     Route::get('/peminjaman', function(){
@@ -62,13 +62,15 @@ Route::prefix('user')->group(function() {
         $tanggal_peminjaman = $request->tanggal_peminjaman;
         $buku_id = $request->buku_id;
         $kondisi_buku_saat_dipinjam = $request->kondisi_buku_saat_dipinjam;
+        $user_id = $request->user_id;
 
         $peminjaman = Peminjaman::create([
             "tanggal_peminjaman" => $tanggal_peminjaman,
             "buku_id" => $buku_id,
-            "kondisi_buku_saat_dipinjam" => $kondisi_buku_saat_dipinjam
+            "kondisi_buku_saat_dipinjam" => $kondisi_buku_saat_dipinjam,
+            "user_id" => $user_id
         ]);
-        if(count($peminjaman) > 0){
+        if($peminjaman){
             return redirect()->route("user.peminjaman");
         }
         return redirect()->back();

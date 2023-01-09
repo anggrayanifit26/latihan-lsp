@@ -12,6 +12,9 @@ class Peminjaman extends Model
     protected $fillable = [
         "tanggal_peminjaman",
         "kondisi_buku",
+        "buku_id",
+        "user_id"
+
     ];
 
     protected $table = "peminjamans";

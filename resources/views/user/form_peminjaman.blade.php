@@ -9,16 +9,18 @@
             <h4>Form Peminjaman</h4>
         </div>
         <div class="card-body">
-            <form action="{{ route('user.submit_peminjaman') }}" class="form-group">
+            <form action="{{ route('user.submit_peminjaman') }}" class="form-group" method="POST">
+                @csrf
                 <div class="mb-3">
                     <label for="">Tanggal Peminjaman</label>
-                    <input type="date" class="form-control">
+                    <input type="date" class="form-control" name="tanggal_peminjaman">
                 </div>
                 <div class="mb-3">
                     <label for="">Pilih Buku</label>
                     <select class="form-select" name="buku_id">
                         <option value="" disabled selected>--Pilih Opsi--</option>
                         @foreach ($buku as $b)
+                        {{-- @dd($buku) --}}
                             <option value="{{ $b->id }}" {{ isset($buku_id) ? $buku_id  == $b->id ? "selected" : "" : "" }}>{{ $b->judul }}</option>
                         @endforeach
                     </select>
