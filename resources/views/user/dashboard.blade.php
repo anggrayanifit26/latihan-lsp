@@ -15,6 +15,8 @@
                 <div class="card">
                     <div class="card-header">
                         {{ $b->kategori->nama }}
+                        <img src="{{ url('/img' . '/' . $b->foto) }}" style="height: 150px;object-fit: cover;"
+                        class="card-img" alt="....">
                     </div>
                     <div class="card-body">
                         <div><b>Nama Buku:</b> {{ $b->judul }}</div>

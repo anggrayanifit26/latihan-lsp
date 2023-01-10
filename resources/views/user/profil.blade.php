@@ -14,13 +14,15 @@
                 <h4>Update Profile</h4>
             </div>
             <div class="card-body">
+                @foreach ($users as $b)
                 <form action="{{ route('user.profil.update') }}" method="POST" enctype="multipart/form-data">
                     @CSRF
                     @METHOD('PUT')
                     <table class="table-striped table-bordered">
                         <tr>
                             <th>Foto</th>
-                            <td><input type="file" class="form-control" name="foto"></td>
+                            <td><input type="file" class="form-control" name="foto">    <img src="{{ url('/img' . '/' . $b->foto) }}" style="height: 150px;object-fit: cover;"
+                                class="card-img" alt="...."></td>
                         </tr>
                         <tr>
                             <th>Nama</th>
@@ -41,11 +43,11 @@
                         <tr>
                             <th>Username</th>
                             <td><input type="text" class="form-control" name="username"
-                                    value="{{ Auth::user()->username }}"></td>
-                        </tr>
-                        <tr>
-                            <th>Password</th>
-                            <td><input type="text" class="form-control" name="password"
+                                value="{{ Auth::user()->username }}"></td>
+                            </tr>
+                            <tr>
+                                <th>Password</th>
+                                <td><input type="text" class="form-control" name="password"
                                     placeholder="Sandi tidak berubah"></td>
                         </tr>
                         <tr>
@@ -57,6 +59,7 @@
             </div>
         </div>
     </table>
-    </div>
-    </form>
+</div>
+</form>
+@endforeach
 @endsection

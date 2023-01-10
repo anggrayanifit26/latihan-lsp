@@ -9,6 +9,7 @@ use App\Models\Buku;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,23 +62,31 @@ Route::prefix('user')->group(function() {
         return view('user.profil');
     })->name('user.profil');
 
-    Route::put('/profil', function(Request $request){
+    Route::put('profil' , function(Request $request){
         $id = Auth::user()->id;
+     
+        $imageName = time().'.'.$request->foto->extension();
+
+        $request->foto->move(public_path('img'),$imageName);
         
-        $imageName = time() .'.'. $request->foto->extension();
-        $request->foto->move(public_path('img', $imageName)); 
+        $user =  User::find($id)->update($request->all());
+       if($request->password != null){
 
-        $user = User::find($id)->update($request->all());
-        $user2 = User::find($id)->update([
-            "password" => Hash::make($request->password),
-        ]);
-        dd($imageName);
-            if($user && $user2 ){ 
-                return redirect()->back()->with("status", "success")->with ("message","Berhasil mengupdate Profil");
-            }
-            return redirect()->back()->with("status","danger")->with("message", "Gagal mengupdate Profil");
+           $user2 = User::find($id)->update([
+            'password' => Hash::make($request->password)
+           ]);
+       }
+       
+       $user3 = User::find($id)->update([
+        'foto' => $imageName
+       ]);
+
+       if ($user && $user2 && $user3) {
+        return redirect()->back()->with('status' , 'success')->with('message' , 'berhasil mengupdate profil');
+       }
+       return redirect()->back()->with('status' , 'danger')->with('message' , 'berhasil mengupdate profil');
+
     })->name('user.profil.update');
-
 
     Route::post('submit_peminjaman', function(Request $request){
         $tanggal_peminjaman = $request->tanggal_peminjaman;
