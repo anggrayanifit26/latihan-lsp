@@ -1,10 +1,14 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        @include('components.user.sidebar')
-
         <div class="row">
-            <div class="col">
+            <div class="col-2">
+                @include('components.user.sidebar')
+            </div>
+            
+            <div class="col-10">
+                <div class="row">
+                    <div class="col">
                 <h2>Buku yang Sedang Dipinjam</h2>
             </div>
             <div class="row">
@@ -13,7 +17,7 @@
                 </div>
             </div>
         </div>
-
+        
         <table class="table">
             <thead>
                 <tr>
@@ -35,4 +39,6 @@
             </tbody>
         </table>
     </div>
+</div>
+</div>
 @endsection
