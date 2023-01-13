@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Identitas;
 use Illuminate\Http\Request;
 
 class ApiIdentitasController extends Controller
@@ -14,7 +15,10 @@ class ApiIdentitasController extends Controller
      */
     public function index()
     {
-        //
+        $ident = Identitas::get();
+        return response()->json([
+            'data' => $ident
+        ]);
     }
 
     /**
@@ -48,7 +52,18 @@ class ApiIdentitasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $iden = Identitas::findOrFail($id);
+        $iden->update([
+            'nama_app' => $request->nama_app,
+            'alamat_app' => $request->alamat_app,
+            'email_app' => $request->email_app,
+            'nomor_hp' => $request->nomor_hp,
+            'foto' => $request->foto
+        ]);
+
+        return response()->json([
+            'data' => $iden
+        ]);
     }
 
     /**

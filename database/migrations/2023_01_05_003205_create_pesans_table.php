@@ -15,8 +15,8 @@ class CreatePesansTable extends Migration
     {
         Schema::create('pesans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('penerima_id')->constrained('users');
-            $table->foreignId('pengirim_id')->constrained('users');
+            $table->foreignId('penerima_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('pengirim_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('judul', 50);
             $table->text('isi');
             $table->enum('status', ['terkirim','dibaca']);

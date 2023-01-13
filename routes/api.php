@@ -23,10 +23,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('user', [App\Http\Controllers\API\UserController::class, 'index']);
 
-Route::get('pesan', [App\Http\Controllers\Api\PesanApiController::class, 'index']);
-Route::post('pesan', [App\Http\Controllers\Api\PesanApiController::class, 'store']);
-Route::post('pesan/update/{id}', [App\Http\Controllers\Api\PesanApiController::class, 'update']);
-// Route::post('kategori', [App\Http\Controllers\Api\KategoriApiController::class, 'store']);
+//Pesan
+Route::get('pesan', [App\Http\Controllers\Api\ApiPesanController::class, 'index']);
+Route::post('pesan/add', [App\Http\Controllers\Api\ApiPesanController::class, 'store']);
+Route::post('pesan/update/{id}', [App\Http\Controllers\Api\ApiPesanController::class, 'update']);
+Route::delete('pesan/delete/{id}', [App\Http\Controllers\Api\ApiPesanController::class, 'destroy']);
+
+//Kategori
 Route::get('kategori', [App\Http\Controllers\Api\ApiKategoriController::class, 'index']);
 Route::delete('kategori/delete/{id}', [App\Http\Controllers\Api\KategoriApiController::class, 'destroy']);
-Route::delete('pesan/delete/{id}', [App\Http\Controllers\Api\PesanApiController::class, 'destroy']);
+
+//Buku
+Route::get('buku', [App\Http\Controllers\Api\ApiBukuController::class, 'index']);
+Route::post('buku/add', [App\Http\Controllers\Api\ApiBukuController::class, 'store']);
+Route::post('buku/update/{id}', [App\Http\Controllers\Api\ApiBukuController::class, 'update']);
+Route::delete('buku/delete/{id}', [App\Http\Controllers\Api\ApiBukuController::class, 'destroy']);
+
+//Identitas
+Route::get('identitas', [App\Http\Controllers\Api\ApiIdentitasController::class, 'index']);
+Route::post('identitas/update/{id}', [App\Http\Controllers\Api\ApiIdentitasController::class, 'update']);

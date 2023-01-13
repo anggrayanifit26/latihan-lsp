@@ -71,6 +71,11 @@ class ApiKategoriController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        $kategori->delete();
+
+        return response()->json([
+            'msg' => 'berhasil menghapus data'
+        ]);
     }
 }

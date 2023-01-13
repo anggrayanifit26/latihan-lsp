@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pesan;
 use Illuminate\Http\Request;
 
 class ApiPesanController extends Controller
@@ -13,6 +14,20 @@ class ApiPesanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        $pesan = Pesan::get();
+        return response()->json([
+            'data' => $pesan,
+            'msg' => 'isi pesan'
+        ], 200);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         //
     }
@@ -25,7 +40,19 @@ class ApiPesanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pesan = Pesan::create([
+            'penerima_id' => $request->penerima_id,
+            'pengirim_id' => $request->pengirim_id,
+            'judul' => $request->judul,
+            'isi' => $request->isi,
+            'status' => $request->status,
+            'tanggal_kirim' => $request->tanggal_kirim,
+        ]);
+
+        return response()->json([
+            'data' => $pesan,
+            'msg' => 'berhasil tambah pesan'
+        ]);
     }
 
     /**
@@ -40,6 +67,17 @@ class ApiPesanController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -48,7 +86,19 @@ class ApiPesanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pesan = Pesan::findOrFail($id);
+        $pesan->update([
+            'penerima_id' => $request->penerima_id,
+            'pengirim_id' => $request->pengirim_id,
+            'judul' => $request->judul,
+            'isi' => $request->isi,
+            'status' => $request->status,
+            'tanggal_kirim' => $request->tanggal_kirim,
+        ]);
+
+        return response()->json([
+            'msg' => 'berhasil mengupdate data'
+        ]);
     }
 
     /**
@@ -59,6 +109,11 @@ class ApiPesanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pesan = Pesan::find($id);
+        $pesan->delete();
+
+        return response()->json([
+            'msg' => 'berhasil menghapus data'
+        ]);
     }
 }
