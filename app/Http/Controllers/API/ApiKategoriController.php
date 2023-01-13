@@ -60,7 +60,16 @@ class ApiKategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        $kategori->update([
+            'kode' => $request->kode,
+            'nama' => $request->nama
+        ]);
+
+        return response()->json([
+            'msg' => 'Berhasil mengupdate data',
+            'data' => $kategori,
+        ], 200);
     }
 
     /**

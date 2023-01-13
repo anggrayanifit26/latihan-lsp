@@ -31,6 +31,8 @@ Route::delete('pesan/delete/{id}', [App\Http\Controllers\Api\ApiPesanController:
 
 //Kategori
 Route::get('kategori', [App\Http\Controllers\Api\ApiKategoriController::class, 'index']);
+Route::post('kategori/add', [App\Http\Controllers\Api\ApiKategoriController::class, 'store']);
+Route::post('kategori/update/{id}', [App\Http\Controllers\Api\ApiKategoriController::class, 'update']);
 Route::delete('kategori/delete/{id}', [App\Http\Controllers\Api\KategoriApiController::class, 'destroy']);
 
 //Buku
@@ -42,3 +44,10 @@ Route::delete('buku/delete/{id}', [App\Http\Controllers\Api\ApiBukuController::c
 //Identitas
 Route::get('identitas', [App\Http\Controllers\Api\ApiIdentitasController::class, 'index']);
 Route::post('identitas/update/{id}', [App\Http\Controllers\Api\ApiIdentitasController::class, 'update']);
+
+//Pemberitahuan
+
+//Peminjaman
+
+//Penerbit
+
