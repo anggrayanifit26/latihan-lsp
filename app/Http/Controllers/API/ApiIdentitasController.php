@@ -74,6 +74,11 @@ class ApiIdentitasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $iden = Identitas::findOrFail($id);
+        $iden->delete();
+
+        return response()->json([
+            'msg' => 'Berhasil delete data'
+        ]);
     }
 }

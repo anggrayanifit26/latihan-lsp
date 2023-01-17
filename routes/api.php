@@ -44,6 +44,7 @@ Route::delete('buku/delete/{id}', [App\Http\Controllers\Api\ApiBukuController::c
 //Identitas
 Route::get('identitas', [App\Http\Controllers\Api\ApiIdentitasController::class, 'index']);
 Route::post('identitas/update/{id}', [App\Http\Controllers\Api\ApiIdentitasController::class, 'update']);
+Route::delete('identitas/delete/{id}', [App\Http\Controllers\Api\ApiIdentitasController::class, 'destroy']);
 
 //Pemberitahuan
 
